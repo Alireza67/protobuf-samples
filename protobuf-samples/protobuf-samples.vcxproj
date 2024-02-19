@@ -83,7 +83,7 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>"$(ProjectDir)protos\protoc.exe" --proto_path=$(ProjectDir)protos\ --cpp_out=$(ProjectDir)protos\  $(ProjectDir)protos\*.proto</Command>
+      <Command>"$(ProjectDir)protos\protoc.exe" --proto_path=$(ProjectDir)protos\ --cpp_out=$(ProjectDir)  $(ProjectDir)protos\*.proto</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

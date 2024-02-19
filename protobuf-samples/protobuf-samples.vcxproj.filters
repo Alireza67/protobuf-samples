@@ -11,9 +11,4 @@
     <None Include="packages.config" />
     <None Include="protos\person.proto" />
   </ItemGroup>
-  <ItemGroup>
-    <Filter Include="protos">
-      <UniqueIdentifier>{dcfb08ce-f452-4ed8-95bf-03bd0b6b62bf}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
 </Project>
