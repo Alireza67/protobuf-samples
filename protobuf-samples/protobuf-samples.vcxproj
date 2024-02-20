@@ -34,6 +34,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="person.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="person.pb.cc">
@@ -125,6 +126,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalDependencies>C:\Program Files (x86)\grpc\lib\libprotobuf.lib;C:\Program Files (x86)\grpc\lib\libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>"$(ProjectDir)protos\protoc.exe" --proto_path=$(ProjectDir)protos\ --cpp_out=$(ProjectDir)  $(ProjectDir)protos\*.proto</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

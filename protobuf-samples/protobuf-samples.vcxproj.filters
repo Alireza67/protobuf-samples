@@ -7,6 +7,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="person.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
