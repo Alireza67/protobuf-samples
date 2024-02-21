@@ -127,3 +127,27 @@ phone_numbers {
 
 	EXPECT_EQ(debugTarget, msg.str());
 }
+
+TEST(protobuf, serialize_parse_str)
+{
+	AddressBook address_book;
+
+	Person* person = address_book.add_people();
+	person->set_name("john doe");
+	person->set_id(12345);
+	person->set_email("john.doe@example.com");
+
+	person = address_book.add_people();
+	person->set_name("david adamz");
+	person->set_id(54321);
+	person->set_email("david.adamz@example.com");
+
+	auto serializeStr = address_book.SerializeAsString();
+
+	AddressBook address_book2;
+	address_book2.ParseFromString(serializeStr);
+
+	auto main = address_book.DebugString();
+	auto result = address_book2.DebugString();
+	EXPECT_EQ(main, result);
+}
