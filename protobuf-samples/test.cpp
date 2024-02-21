@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "person.pb.h"
 
-TEST(protobuf, person)
+TEST(protobuf, set_get_optional_and_repeated)
 {
 	AddressBook address_book;
 
@@ -63,4 +63,67 @@ TEST(protobuf, person)
 	EXPECT_EQ(mailTarget, mails);
 	EXPECT_EQ(numberTarget, numbers);
 	EXPECT_EQ(typeTarget, types);
+}
+
+TEST(protobuf, debug_string)
+{
+	AddressBook address_book;
+
+	Person* person = address_book.add_people();
+	person->set_name("john doe");
+	person->set_id(12345);
+	person->set_email("john.doe@example.com");
+
+	auto phoneNumber = person->add_phone_numbers();
+	phoneNumber->set_number("123-456-7890");
+	phoneNumber->set_type("HOME");
+
+	phoneNumber = person->add_phone_numbers();
+	phoneNumber->set_number("987-654-3210");
+	phoneNumber->set_type("OFFICE");
+
+	person = address_book.add_people();
+	person->set_name("david adamz");
+	person->set_id(54321);
+	person->set_email("david.adamz@example.com");
+
+	phoneNumber = person->add_phone_numbers();
+	phoneNumber->set_number("357-654-3210");
+	phoneNumber->set_type("PHONE");
+
+	phoneNumber = person->add_phone_numbers();
+	phoneNumber->set_number("753-951-8520");
+	phoneNumber->set_type("COMPANY");
+
+	std::stringstream msg;
+	for (auto i{ 0 }; i < address_book.people().size(); i++)
+	{
+		msg << address_book.mutable_people(i)->DebugString();
+	}
+
+	auto debugTarget{ R"(name: "john doe"
+id: 12345
+email: "john.doe@example.com"
+phone_numbers {
+  number: "123-456-7890"
+  type: "HOME"
+}
+phone_numbers {
+  number: "987-654-3210"
+  type: "OFFICE"
+}
+name: "david adamz"
+id: 54321
+email: "david.adamz@example.com"
+phone_numbers {
+  number: "357-654-3210"
+  type: "PHONE"
+}
+phone_numbers {
+  number: "753-951-8520"
+  type: "COMPANY"
+}
+)" };
+
+	EXPECT_EQ(debugTarget, msg.str());
 }
