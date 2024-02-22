@@ -37,6 +37,8 @@
     <ClInclude Include="person.pb.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="extensibility.cpp" />
+    <ClCompile Include="json-support.cpp" />
     <ClCompile Include="person.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

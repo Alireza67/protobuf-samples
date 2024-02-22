@@ -5,6 +5,8 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="person.pb.cc" />
     <ClCompile Include="serialization.cpp" />
+    <ClCompile Include="extensibility.cpp" />
+    <ClCompile Include="json-support.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
