@@ -32,17 +32,23 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)generated-files;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)generated-files;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemGroup>
+    <ClInclude Include="generated-files\person.pb.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="person.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="extensibility.cpp" />
-    <ClCompile Include="json-support.cpp" />
-    <ClCompile Include="person.pb.cc">
+    <ClCompile Include="generated-files\person.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="json-support.cpp" />
     <ClCompile Include="baseFeatures.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -94,7 +100,7 @@
       <AdditionalDependencies>C:\Program Files (x86)\grpc\lib\libprotobuf.lib;C:\Program Files (x86)\grpc\lib\libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>"$(ProjectDir)protos\protoc.exe" --proto_path=$(ProjectDir)protos\ --cpp_out=$(ProjectDir)  $(ProjectDir)protos\*.proto</Command>
+      <Command>"$(ProjectDir)protos\protoc.exe" --proto_path=$(ProjectDir)protos\ --cpp_out=$(ProjectDir)generated-files  $(ProjectDir)protos\*.proto</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -132,7 +138,7 @@
       <AdditionalDependencies>C:\Program Files (x86)\grpc\lib\libprotobuf.lib;C:\Program Files (x86)\grpc\lib\libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>"$(ProjectDir)protos\protoc.exe" --proto_path=$(ProjectDir)protos\ --cpp_out=$(ProjectDir)  $(ProjectDir)protos\*.proto</Command>
+      <Command>"$(ProjectDir)protos\protoc.exe" --proto_path=$(ProjectDir)protos\ --cpp_out=$(ProjectDir)generated-files  $(ProjectDir)protos\*.proto</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

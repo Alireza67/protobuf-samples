@@ -3,14 +3,14 @@
   <ItemGroup>
     <ClCompile Include="baseFeatures.cpp" />
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="person.pb.cc" />
     <ClCompile Include="serialization.cpp" />
     <ClCompile Include="extensibility.cpp" />
     <ClCompile Include="json-support.cpp" />
+    <ClCompile Include="generated-files\person.pb.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="person.pb.h" />
+    <ClInclude Include="generated-files\person.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
