@@ -5,19 +5,26 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 
+set(PROTO_FILES protobuf-samples/protos/person.proto)
+find_package(Protobuf REQUIRED)
+include_directories(${PROTOBUF_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_FILES})
+
 set(SOURCE protobuf-samples/baseFeatures.cpp)
 list(APPEND SOURCE protobuf-samples/pch.cpp)
+list(APPEND SOURCE protobuf-samples/json-support.cpp)
+list(APPEND SOURCE protobuf-samples/serialization.cpp)
+list(APPEND SOURCE protobuf-samples/extensibility.cpp)
+list(APPEND SOURCE ${PROTO_SRCS})
 
 add_executable(${PROJECT_NAME} ${SOURCE})
-
-find_package(Protobuf REQUIRED)
-protobuf_generate_cpp(protobuf-samples/ protobuf-samples/ protobuf-samples/protos/)
-include_directories(${Protobuf_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PUBLIC protobuf-samples/)
 target_link_libraries(${PROJECT_NAME} PRIVATE ${Protobuf_LIBRARIES})
 
-
-find_package(GTest REQUIRED COMPONENTS gtest_main gtest_static)
-target_link_libraries(${PROJECT_NAME} PRIVATE gtest::gtest_main)
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PRIVATE GTest::gtest_main)
 
 enable_testing()
 include(GoogleTest)
