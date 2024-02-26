@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+message Bar
+{
+	string discription = 1;
+	bytes payload = 2;
+}
+
+message Foo 
+{
+	oneof item 	
+	{
+		int32 age = 1;
+		bool is_male = 2;
+		double power = 3;
+		Bar innerBar = 4;
+	}
+
+	bytes properties = 5;
+}

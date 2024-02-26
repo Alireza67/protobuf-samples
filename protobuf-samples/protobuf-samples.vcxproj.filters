@@ -6,14 +6,32 @@
     <ClCompile Include="serialization.cpp" />
     <ClCompile Include="extensibility.cpp" />
     <ClCompile Include="json-support.cpp" />
-    <ClCompile Include="generated-files\person.pb.cc" />
+    <ClCompile Include="generated-files\check-oneof.pb.cc">
+      <Filter>protoSources</Filter>
+    </ClCompile>
+    <ClCompile Include="generated-files\person.pb.cc">
+      <Filter>protoSources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="generated-files\person.pb.h" />
+    <ClInclude Include="generated-files\person.pb.h">
+      <Filter>protoHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="generated-files\check-oneof.pb.h">
+      <Filter>protoHeaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="protos\person.proto" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="protoHeaders">
+      <UniqueIdentifier>{d79dbe47-4bd6-4f69-b2aa-243409294da9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protoSources">
+      <UniqueIdentifier>{276c1859-2b44-4adf-8a02-826266224252}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "person.pb.h"
+#include "check-oneof.pb.h"
 
 TEST(baseFeatures, set_get_optional_and_repeated)
 {
@@ -128,4 +129,41 @@ phone_numbers {
 )" };
 
 	EXPECT_EQ(debugTarget, msg.str());
+}
+
+TEST(baseFeatures, oneof)
+{
+	Foo obj;
+	EXPECT_EQ(obj.ITEM_NOT_SET, obj.item_case());
+
+	obj.set_age(10);
+	EXPECT_EQ(obj.kAge, obj.item_case());
+	EXPECT_EQ(10, obj.age());
+
+	obj.set_is_male(true);
+	EXPECT_EQ(obj.kIsMale, obj.item_case());
+	EXPECT_TRUE(obj.is_male());
+
+	obj.set_power(99.99);
+	auto epsilon = 1e-6;
+	EXPECT_EQ(obj.kPower, obj.item_case());
+	EXPECT_FLOAT_EQ(99.99, obj.power(), epsilon);
+}
+
+void CrashMemory()
+{
+	Foo obj;
+	auto innerBar = obj.mutable_innerbar();
+	innerBar->set_payload("This is a normal test!"s);
+	obj.set_age(30);
+	auto payload = innerBar->payload();
+	if (payload != "This is a normal test!"s)
+	{
+		exit(1);
+	}
+}
+
+TEST(baseFeatures, oneof_exception)
+{	
+	EXPECT_DEATH(CrashMemory(), ".*");
 }
