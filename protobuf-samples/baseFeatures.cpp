@@ -145,9 +145,8 @@ TEST(baseFeatures, oneof)
 	EXPECT_TRUE(obj.is_male());
 
 	obj.set_power(99.99);
-	auto epsilon = 1e-6;
 	EXPECT_EQ(obj.kPower, obj.item_case());
-	EXPECT_FLOAT_EQ(99.99, obj.power(), epsilon);
+	EXPECT_FLOAT_EQ(99.99, obj.power());
 }
 
 void CrashMemory()
