@@ -17,6 +17,7 @@ list(APPEND SOURCE protobuf-samples/pch.cpp)
 list(APPEND SOURCE protobuf-samples/json-support.cpp)
 list(APPEND SOURCE protobuf-samples/serialization.cpp)
 list(APPEND SOURCE protobuf-samples/extensibility.cpp)
+list(APPEND SOURCE protobuf-samples/arena.cpp)
 list(APPEND SOURCE ${PROTO_SRCS})
 
 add_executable(${PROJECT_NAME} ${SOURCE})

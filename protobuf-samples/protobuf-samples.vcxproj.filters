@@ -12,6 +12,7 @@
     <ClCompile Include="generated-files\person.pb.cc">
       <Filter>protoSources</Filter>
     </ClCompile>
+    <ClCompile Include="arena.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

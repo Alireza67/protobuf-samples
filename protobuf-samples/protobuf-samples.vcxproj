@@ -44,6 +44,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="arena.cpp" />
     <ClCompile Include="extensibility.cpp" />
     <ClCompile Include="generated-files\check-oneof.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
