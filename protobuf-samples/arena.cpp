@@ -24,11 +24,36 @@ TEST(arenaTest, SpaceAllocated_SpaceUsed)
 	std::vector<AddressBook*> data;
 	data.reserve(1'000'000);
 
+	EXPECT_EQ(0, arena.SpaceAllocated());
+	EXPECT_EQ(0, arena.SpaceUsed());
+
 	for (auto i{ 0 }; i < 1'000'000; i++)
 	{
 		data.emplace_back(google::protobuf::Arena::CreateMessage<AddressBook>(&arena));
 	}
 
 	EXPECT_LT(sizeof(AddressBook) * 1'000'000, arena.SpaceAllocated());
+	EXPECT_EQ(sizeof(AddressBook) * 1'000'000, arena.SpaceUsed());
+}
+
+TEST(arenaTest, options)
+{
+	google::protobuf::ArenaOptions options;
+	options.initial_block = new char[48 * 1024 * 1024];
+	options.initial_block_size = 48 * 1024 * 1024;
+	google::protobuf::Arena arena(options);
+
+	std::vector<AddressBook*> data;
+	data.reserve(1'000'000);
+
+	EXPECT_EQ(options.initial_block_size, arena.SpaceAllocated());
+	EXPECT_EQ(0, arena.SpaceUsed());
+
+	for (auto i{ 0 }; i < 1'000'000; i++)
+	{
+		data.emplace_back(google::protobuf::Arena::CreateMessage<AddressBook>(&arena));
+	}
+
+	EXPECT_EQ(options.initial_block_size, arena.SpaceAllocated());
 	EXPECT_EQ(sizeof(AddressBook) * 1'000'000, arena.SpaceUsed());
 }
